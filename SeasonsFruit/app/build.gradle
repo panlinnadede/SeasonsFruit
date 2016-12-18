@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
@@ -17,6 +18,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -28,4 +31,43 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.1'
     compile 'com.android.support:design:25.0.1'
     testCompile 'junit:junit:4.12'
+
+    compile project(':lcrapiddeveloplibrary')
+
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    compile 'cn.bmob.android:http-legacy:1.0'
+
+    //以下SDK开发者请根据需要自行选择
+    //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
+    //3.5.0：请务必查看下面注释[1]
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+
+    //bmob-push：Bmob的推送包
+    //compile 'cn.bmob.android:bmob-push:0.8'
+
+    //bmob-im：Bmob的即时通讯包，注意每个版本的im依赖特定版本的bmob-sdk，具体的依赖关系可查看下面注释[2]
+    //compile 'cn.bmob.android:bmob-im:2.0.5@aar'
+    //compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+
+    //bmob-sms ：Bmob单独为短信服务提供的包
+    //compile 'cn.bmob.android:bmob-sms:1.0.1'
+
+    //bmob 3.5.0需要的依赖
+    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+
+
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'io.reactivex:rxjava:1.1.8'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+    compile 'com.github.VictorAlbertos.RxCache:core:1.4.6'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.android.support:cardview-v7:25.0.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'cn.bingoogolapple:bga-banner:2.0.9@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.liulishuo.filedownloader:library:1.1.0'
+    compile project(':lcrapiddeveloplibrary')
 }

@@ -1,20 +1,50 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/green500</item>
+        <item name="colorPrimaryDark">@color/green700</item>
+        <item name="colorAccent">@color/green500</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:colorButtonNormal">@color/green500</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <!--首次进入无黑色-->
+    <style name="WelcomeTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/green500</item>
+        <item name="colorPrimaryDark">@color/green700</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
+        <item name="android:windowContentOverlay">@null</item>
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/ic_launcher</item>
+    </style>
+
+    <!--首页底部tabstyle-->
+    <style name="HomeActivityTab">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginRight">15dp</item>
+    </style>
+
+    <!--首页radiobutton  自定义效果-->
+    <style name="RadioButtonBottomTab">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">@dimen/txtsize_caption</item>
+        <item name="android:textColor">@drawable/txtcolor_gray2oran_sel1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 </resources>

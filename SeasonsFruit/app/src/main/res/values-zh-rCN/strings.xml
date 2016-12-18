@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_home_title">首页</string>
+    <string name="tab_spell_title">拼团</string>
+    <string name="tab_shopping_cart_title">购物车</string>
+    <string name="tab_personal_title">我的</string>
+</resources>
