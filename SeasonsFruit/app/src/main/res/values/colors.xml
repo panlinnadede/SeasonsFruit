@@ -10,4 +10,8 @@
 
     <color name="txt_gray">#999999</color>
 
+    <color name="window_gray">#f4f4f4</color>
+    <color name="primary_text">#ffffff</color>
+    <color name="secondary_text">#ffffff</color>
+
 </resources>

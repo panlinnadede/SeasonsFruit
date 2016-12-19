@@ -21,8 +21,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     private ConnectivityManager mConnectivityManager;
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mContext = getActivityContext();
         initView();

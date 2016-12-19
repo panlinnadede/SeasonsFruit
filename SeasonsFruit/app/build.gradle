@@ -20,6 +20,11 @@ android {
     }
     //兼容Android6.0系统所需，如果这句话报错，可在dependencies标签下使用compile 'cn.bmob.android:http-legacy:1.0'
     useLibrary 'org.apache.http.legacy'
+
+    packagingOptions {
+        //解决Duplicate files copied in APK META-INF/rxjava-properties异常
+        exclude 'META-INF/rxjava.properties'
+    }
 }
 
 dependencies {
@@ -31,8 +36,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.1'
     compile 'com.android.support:design:25.0.1'
     testCompile 'junit:junit:4.12'
-
-    compile project(':lcrapiddeveloplibrary')
 
     //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
     compile 'cn.bmob.android:http-legacy:1.0'
@@ -51,10 +54,6 @@ dependencies {
 
     //bmob-sms ：Bmob单独为短信服务提供的包
     //compile 'cn.bmob.android:bmob-sms:1.0.1'
-
-    //bmob 3.5.0需要的依赖
-    compile 'cn.bmob.android:bmob-sdk:3.5.0'
-
 
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'io.reactivex:rxjava:1.1.8'
