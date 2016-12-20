@@ -84,7 +84,7 @@ public class HomeTabActivity extends BaseActivity
 
     @Override
     protected void findViewById() {
-        homeRadioGroup = (RadioGroup)findViewById(R.id.home_radio_group);
+
     }
 
     @Override

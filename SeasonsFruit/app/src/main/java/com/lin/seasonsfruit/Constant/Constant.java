@@ -7,4 +7,5 @@ package com.lin.seasonsfruit.Constant;
  */
 
 public class Constant {
+    public static String API_SERVER="";
 }
