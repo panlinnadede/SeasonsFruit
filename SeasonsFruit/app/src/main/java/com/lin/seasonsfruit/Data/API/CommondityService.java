@@ -1,6 +1,7 @@
 package com.lin.seasonsfruit.Data.API;
 
-import java.util.List;
+import com.lin.seasonsfruit.MVP.Entity.HomeDto;
+import com.lin.seasonsfruit.MVP.Entity.HttpResult;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -10,11 +11,11 @@ import rx.Observable;
  * API接口
  * 因为使用RxCache作为缓存策略 所以这里不需要写缓存信息
  */
-public interface BookService {
+public interface CommondityService {
 
-//    //获取首页详情
-//    @GET("api/getHomeInfo")
-//    Observable<HttpResult<HomeDto>> getHomeInfo();
+    //获取首页详情
+    @GET("api/getHomeInfo")
+    Observable<HttpResult<HomeDto>> getHomeInfo();
 //
 //    //获取书籍详情
 //    @GET("api/getBookInfo")

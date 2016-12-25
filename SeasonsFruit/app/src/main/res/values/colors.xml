@@ -14,4 +14,6 @@
     <color name="primary_text">#ffffff</color>
     <color name="secondary_text">#ffffff</color>
 
+    <color name="title_top_alpha">#90333333</color><!--标题黑色半透明-->
+
 </resources>

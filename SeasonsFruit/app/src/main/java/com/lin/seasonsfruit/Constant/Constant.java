@@ -7,5 +7,9 @@ package com.lin.seasonsfruit.Constant;
  */
 
 public class Constant {
-    public static String API_SERVER="";
+    public static String API_SERVER="http://mylance.top";
+
+    public static final String ERROR_TITLE="网络请求失败";
+    public static final String ERROR_CONTEXT="是网络先动的手不怪我";
+    public static final String ERROR_BUTTON="重试";
 }

@@ -1,5 +1,7 @@
 package com.lin.seasonsfruit.Data.API;
 
+import com.lin.seasonsfruit.MVP.Entity.HomeDto;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -26,9 +28,9 @@ public interface CacheProviders {
 //    //获取书库分类信息缓存数据 缓存时间 永久
 //    Observable<Reply<List<BookTypeDto>>> getTypeList(Observable<List<BookTypeDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 //
-//    //获取首页配置数据 banner 最热 最新  缓存时间7天
-//    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-//    Observable<Reply<HomeDto>> getHomeInfo(Observable<HomeDto> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
+    //获取首页配置数据 banner 最热 最新  缓存时间7天
+    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
+    Observable<Reply<HomeDto>> getHomeInfo(Observable<HomeDto> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 //
 //    //获取搜索标签  缓存时间7天
 //    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)

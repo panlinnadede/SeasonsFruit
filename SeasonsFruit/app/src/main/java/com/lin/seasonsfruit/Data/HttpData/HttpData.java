@@ -1,17 +1,15 @@
 package com.lin.seasonsfruit.Data.HttpData;
 
 
-import com.lin.seasonsfruit.Data.API.BookService;
+import com.lin.seasonsfruit.Data.API.CommondityService;
 import com.lin.seasonsfruit.Data.API.CacheProviders;
 import com.lin.seasonsfruit.Data.Retrofit.ApiException;
 import com.lin.seasonsfruit.Data.Retrofit.RetrofitUtils;
+import com.lin.seasonsfruit.MVP.Entity.HomeDto;
 import com.lin.seasonsfruit.MVP.Entity.HttpResult;
 import com.lin.seasonsfruit.Util.FileUtil;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
 
 import io.rx_cache.DynamicKey;
 import io.rx_cache.EvictDynamicKey;
@@ -36,7 +34,7 @@ public class HttpData extends RetrofitUtils {
     private static final CacheProviders providers = new RxCache.Builder()
             .persistence(cacheDirectory)
             .using(CacheProviders.class);
-    protected static final BookService service = getRetrofit().create(BookService.class);
+    protected static final CommondityService service = getRetrofit().create(CommondityService.class);
 
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
@@ -54,12 +52,12 @@ public class HttpData extends RetrofitUtils {
 //        Observable observableCahce=providers.getTypeList(observable,new DynamicKey("书本类别"),new EvictDynamicKey(false)).map(new HttpResultFuncCcche<List<BookTypeDto>>());
 //        setSubscribe(observableCahce,observer);
 //    }
-//    //获取app首页配置信息  banner  最新 最热
-//    public void getHomeInfo(boolean isload,Observer<HomeDto> observer){
-//        Observable observable=service.getHomeInfo().map(new HttpResultFunc<HomeDto>());;
-//        Observable observableCache=providers.getHomeInfo(observable,new DynamicKey("首页配置"),new EvictDynamicKey(isload)).map(new HttpResultFuncCcche<HomeDto>());
-//        setSubscribe(observableCache,observer);
-//    }
+    //获取app首页配置信息  banner  最新 最热
+    public void getHomeInfo(boolean isload,Observer<HomeDto> observer){
+        Observable observable=service.getHomeInfo().map(new HttpResultFunc<HomeDto>());
+        Observable observableCache=providers.getHomeInfo(observable,new DynamicKey("首页配置"),new EvictDynamicKey(isload)).map(new HttpResultFuncCcche<HomeDto>());
+        setSubscribe(observableCache,observer);
+    }
 //    //获得搜索热门标签
 //    public void getSearchLable(Observer<List<String>> observer){
 //        Observable observable=service.getHotLable().map(new HttpResultFunc<List<String>>());;

@@ -1,5 +1,7 @@
 package com.lin.seasonsfruit.MVP.Home.model;
 
+import android.util.Log;
+
 import com.lin.seasonsfruit.Data.HttpData.HttpData;
 import com.lin.seasonsfruit.MVP.Entity.HomeDto;
 
@@ -11,21 +13,21 @@ import rx.Observer;
 
 public class HomePageFragmentModel {
     public void loadData(boolean isload,final OnLoadDataListListener listener){
-//        HttpData.getInstance().getHomeInfo(isload,new Observer<HomeDto>() {
-//            @Override
-//            public void onCompleted() {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                listener.onFailure(e);
-//            }
-//
-//            @Override
-//            public void onNext(HomeDto homeDto) {
-//                listener.onSuccess(homeDto);
-//            }
-//        });
+        HttpData.getInstance().getHomeInfo(isload,new Observer<HomeDto>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                listener.onFailure(e);
+            }
+
+            @Override
+            public void onNext(HomeDto homeDto) {
+                listener.onSuccess(homeDto);
+            }
+        });
     }
 }
