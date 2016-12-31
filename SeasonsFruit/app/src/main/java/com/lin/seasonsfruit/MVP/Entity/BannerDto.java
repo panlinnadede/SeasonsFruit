@@ -1,54 +1,51 @@
 package com.lin.seasonsfruit.MVP.Entity;
 
 /**
- * Created by lin on 16-12-17.
- *
- * 滚动横幅的属性集合类
+ * Created by XY on 2016/9/17.
  */
-
 public class BannerDto {
+
     /**
      * id : 1
      * imageUrl : http://odog3v89f.bkt.c    louddn.com/banner/banner1.png
-     * mBannerTitle : 游离在正邪边缘的人:残袍
-     * mCommondityId : 29286
+     * bannerTitle : 游离在正邪边缘的人:残袍
+     * bookid : 29286
      */
 
-    private int mId;
-    private String mImageUrl;
-    private String mBannerTitle;
-    private int mCommondityId;
+    private int id;
+    private String imageUrl;
+    private String bannerTitle;
+    private int bookid;
 
-    public void setmId(int mId) {
-        this.mId = mId;
+    public int getId() {
+        return id;
     }
 
-    public void setmImageUrl(String mImageUrl) {
-        this.mImageUrl = mImageUrl;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setmBannerTitle(String mBannerTitle) {
-        this.mBannerTitle = mBannerTitle;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public String getmBannerTitle() {
-        return mBannerTitle;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public String getmImageUrl() {
-        return mImageUrl;
+    public String getBannerTitle() {
+        return bannerTitle;
     }
 
-    public int getmId() {
-        return mId;
+    public void setBannerTitle(String bannerTitle) {
+        this.bannerTitle = bannerTitle;
     }
 
-    public void setmCommondityId(int mCommondityId) {
-        this.mCommondityId = mCommondityId;
+    public int getBookid() {
+        return bookid;
     }
 
-    public int getmCommondityId() {
-        return mCommondityId;
+    public void setBookid(int bookid) {
+        this.bookid = bookid;
     }
-
 }

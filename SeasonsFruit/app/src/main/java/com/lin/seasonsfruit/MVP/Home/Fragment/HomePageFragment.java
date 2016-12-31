@@ -91,8 +91,8 @@ public class HomePageFragment extends BaseFragment implements HomePageFragmentVi
         List<String> bannerTitle = new ArrayList<>();
         List<String> bannerImage = new ArrayList<>();
         for (int temp = 0 ; temp < data.getBanner().size() ; temp++) {
-            bannerTitle.add(data.getBanner().get(temp).getmBannerTitle());
-            bannerImage.add(data.getBanner().get(temp).getmImageUrl());
+            bannerTitle.add(data.getBanner().get(temp).getBannerTitle());
+            bannerImage.add(data.getBanner().get(temp).getImageUrl());
         }
         homePageBanner.setAdapter(new BGABannerAdapter(getActivity()));
         homePageBanner.setData(bannerImage, bannerTitle);

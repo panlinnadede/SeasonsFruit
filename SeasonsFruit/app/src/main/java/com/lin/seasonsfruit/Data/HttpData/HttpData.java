@@ -1,6 +1,8 @@
 package com.lin.seasonsfruit.Data.HttpData;
 
 
+import android.util.Log;
+
 import com.lin.seasonsfruit.Data.API.CommondityService;
 import com.lin.seasonsfruit.Data.API.CacheProviders;
 import com.lin.seasonsfruit.Data.Retrofit.ApiException;
@@ -114,6 +116,7 @@ public class HttpData extends RetrofitUtils {
             if (httpResult.getCode() !=1 ) {
                 throw new ApiException(httpResult);
             }
+            HomeDto homeDto = (HomeDto) httpResult.getData();
             return httpResult.getData();
         }
     }

@@ -3,11 +3,12 @@ package com.lin.seasonsfruit.MVP.Entity;
 import java.util.List;
 
 /**
- * Created by lin on 16-12-20.
+ * Created by XY on 2016/9/17.
  */
-
 public class HomeDto {
     private List<BannerDto> banner;
+    private List<BookInfoListDto> hotBook;
+    private List<BookInfoListDto> newBook;
 
     public List<BannerDto> getBanner() {
         return banner;
@@ -15,5 +16,21 @@ public class HomeDto {
 
     public void setBanner(List<BannerDto> banner) {
         this.banner = banner;
+    }
+
+    public List<BookInfoListDto> getHotBook() {
+        return hotBook;
+    }
+
+    public void setHotBook(List<BookInfoListDto> hotBook) {
+        this.hotBook = hotBook;
+    }
+
+    public List<BookInfoListDto> getNewBook() {
+        return newBook;
+    }
+
+    public void setNewBook(List<BookInfoListDto> newBook) {
+        this.newBook = newBook;
     }
 }
