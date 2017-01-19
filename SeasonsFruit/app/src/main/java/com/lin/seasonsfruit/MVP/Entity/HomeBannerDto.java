@@ -1,21 +1,23 @@
 package com.lin.seasonsfruit.MVP.Entity;
 
+import cn.bmob.v3.BmobObject;
+
 /**
  * Created by XY on 2016/9/17.
  */
-public class BannerDto {
+public class HomeBannerDto extends BmobObject {
 
     /**
      * id : 1
-     * imageUrl : http://odog3v89f.bkt.c    louddn.com/banner/banner1.png
+     * imageUrl : http://odog3v89f.bkt.clouddn.com/banner/banner1.png
      * bannerTitle : 游离在正邪边缘的人:残袍
-     * bookid : 29286
+     * goodsId : 29286
      */
 
     private int id;
     private String imageUrl;
     private String bannerTitle;
-    private int bookid;
+    private int goodsId;
 
     public int getId() {
         return id;
@@ -41,11 +43,11 @@ public class BannerDto {
         this.bannerTitle = bannerTitle;
     }
 
-    public int getBookid() {
-        return bookid;
+    public int getGoodsId() {
+        return goodsId;
     }
 
-    public void setBookid(int bookid) {
-        this.bookid = bookid;
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
     }
 }

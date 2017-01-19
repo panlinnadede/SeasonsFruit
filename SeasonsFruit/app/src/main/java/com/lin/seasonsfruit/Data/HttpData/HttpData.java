@@ -3,18 +3,22 @@ package com.lin.seasonsfruit.Data.HttpData;
 
 import android.util.Log;
 
-import com.lin.seasonsfruit.Data.API.CommondityService;
+import com.lin.seasonsfruit.Data.API.HomeService;
 import com.lin.seasonsfruit.Data.API.CacheProviders;
 import com.lin.seasonsfruit.Data.Retrofit.ApiException;
 import com.lin.seasonsfruit.Data.Retrofit.RetrofitUtils;
+import com.lin.seasonsfruit.MVP.Entity.HomeBannerDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeGoodsClassDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeGoodsListDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeTipDto;
 import com.lin.seasonsfruit.MVP.Entity.HttpResult;
 import com.lin.seasonsfruit.Util.FileUtil;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
-import io.rx_cache.DynamicKey;
-import io.rx_cache.EvictDynamicKey;
 import io.rx_cache.Reply;
 import io.rx_cache.internal.RxCache;
 import rx.Observable;
@@ -36,7 +40,7 @@ public class HttpData extends RetrofitUtils {
     private static final CacheProviders providers = new RxCache.Builder()
             .persistence(cacheDirectory)
             .using(CacheProviders.class);
-    protected static final CommondityService service = getRetrofit().create(CommondityService.class);
+    protected static final HomeService service = getRetrofit().create(HomeService.class);
 
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
@@ -55,41 +59,79 @@ public class HttpData extends RetrofitUtils {
 //        setSubscribe(observableCahce,observer);
 //    }
     //获取app首页配置信息  banner  最新 最热
-    public void getHomeInfo(boolean isload,Observer<HomeDto> observer){
-        Observable observable=service.getHomeInfo().map(new HttpResultFunc<HomeDto>());
-        Observable observableCache=providers.getHomeInfo(observable,new DynamicKey("首页配置"),new EvictDynamicKey(isload)).map(new HttpResultFuncCcche<HomeDto>());
-        setSubscribe(observableCache,observer);
+//    public void getHomeInfo(boolean isload,Observer<List<HomeDto>> observer){
+////        Observable observable=service.getHomeInfo().map(new HttpResultFunc<HomeDto>());
+//        Observable observable=service.getHomeInfo()
+//                .flatMap(new Func1<Map<String, List<HomeDto>>, Observable<?>>() {
+//                    @Override
+//                    public Observable<?> call(Map<String, List<HomeDto>> map) {
+//                        return Observable.just(map.get("results"));
+//                    }
+//                })
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .unsubscribeOn(Schedulers.io());
+//        observable.subscribe(observer);
+//
+////        Observable observableCache=providers.getHomeInfo(observable,new DynamicKey("首页配置"),new EvictDynamicKey(isload)).map(new HttpResultFuncCcche<HomeDto>());
+////        setSubscribe(observableCache,observer);
+//    }
+
+    public void getHomeBanner(boolean isload,Observer<List<HomeBannerDto>> observer){
+        Observable observable=service.getHomeBanner()
+                .flatMap(new Func1<Map<String, List<HomeBannerDto>>, Observable<?>>() {
+                    @Override
+                    public Observable<?> call(Map<String, List<HomeBannerDto>> map) {
+                        return Observable.just(map.get("results"));
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io());
+        observable.subscribe(observer);
     }
-//    //获得搜索热门标签
-//    public void getSearchLable(Observer<List<String>> observer){
-//        Observable observable=service.getHotLable().map(new HttpResultFunc<List<String>>());;
-//        Observable observableCache=providers.getHotLable(observable,new DynamicKey("搜索热门标签"), new EvictDynamicKey(false)).map(new HttpResultFuncCcche<List<String>>());
-//        setSubscribe(observableCache,observer);
-//    }
-//    //根据类型获取书籍集合
-//    public void getBookList(int bookType, int pageIndex, Observer<List<BookInfoListDto>> observer) {
-//        Observable observable = service.getBookList(bookType,pageIndex).map(new HttpResultFunc<List<BookInfoListDto>>());
-//        Observable observableCache=providers.getBookList(observable,new DynamicKey("getStackTypeHtml"+bookType+pageIndex), new EvictDynamicKey(false)).map(new HttpResultFuncCcche<List<BookInfoListDto>>());
-//        setSubscribe(observableCache, observer);
-//    }
-//    //根据关键字搜索书籍
-//    public void getSearchList(String key, Observer<List<BookInfoListDto>> observer){
-//        try {
-//            //中文记得转码  不然会乱码  搜索不出想要的效果
-//            key = URLEncoder.encode(key, "utf-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        Observable observable=service.getSearchList(key).map(new HttpResultFunc<List<BookInfoListDto>>());
-//        Observable observableCache=providers.getSearchList(observable,new DynamicKey("getSearchList&"+key), new EvictDynamicKey(false)).map(new HttpResultFuncCcche<List<BookInfoListDto>>());
-//        setSubscribe(observableCache, observer);
-//    }
-//    //获取书籍详情
-//    public void getBookInfo(int id, Observer<BookInfoDto> observer){
-//        Observable observable=service.getBookInfo(id).map(new HttpResultFunc<BookInfoDto>());
-//        Observable observableCache=providers.getBookInfo(observable,new DynamicKey("getBookInfo&"+id), new EvictDynamicKey(false)).map(new HttpResultFuncCcche<BookInfoDto>());
-//        setSubscribe(observableCache, observer);
-//    }
+
+    public void getHomeGoodsClass(boolean isload,Observer<List<HomeGoodsClassDto>> observer){
+        Observable observable=service.getHomeGoodsClass()
+                .flatMap(new Func1<Map<String, List<HomeGoodsClassDto>>, Observable<?>>() {
+                    @Override
+                    public Observable<?> call(Map<String, List<HomeGoodsClassDto>> map) {
+                        return Observable.just(map.get("results"));
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io());
+        observable.subscribe(observer);
+    }
+
+    public void getHomeGoodsList(boolean isload,Observer<List<HomeGoodsListDto>> observer){
+        Observable observable=service.getHomeGoodsList()
+                .flatMap(new Func1<Map<String, List<HomeGoodsListDto>>, Observable<?>>() {
+                    @Override
+                    public Observable<?> call(Map<String, List<HomeGoodsListDto>> map) {
+                        return Observable.just(map.get("results"));
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io());
+        observable.subscribe(observer);
+    }
+
+    public void getHomeTip(boolean isload,Observer<List<HomeTipDto>> observer){
+        Observable observable=service.getHomeTip()
+                .flatMap(new Func1<Map<String, List<HomeTipDto>>, Observable<?>>() {
+                    @Override
+                    public Observable<?> call(Map<String, List<HomeTipDto>> map) {
+                        return Observable.just(map.get("results"));
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io());
+        observable.subscribe(observer);
+    }
 
     /**
      * 插入观察者
@@ -113,13 +155,14 @@ public class HttpData extends RetrofitUtils {
 
         @Override
         public T call(HttpResult<T> httpResult) {
+            Log.d("PLPLPL", "HttpResultFunc--call: httpResult.getCode = " + httpResult.getCode() + " httpResult.getData = " + httpResult.getData());
             if (httpResult.getCode() !=1 ) {
                 throw new ApiException(httpResult);
             }
-            HomeDto homeDto = (HomeDto) httpResult.getData();
             return httpResult.getData();
         }
     }
+
     /**
      * 用来统一处理RxCacha的结果
      */

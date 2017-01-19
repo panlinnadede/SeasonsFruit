@@ -2,7 +2,6 @@ package com.lin.seasonsfruit.MVP.Home.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,11 @@ import android.view.ViewGroup;
 import com.lin.seasonsfruit.Constant.Constant;
 import com.lin.seasonsfruit.MVP.Adapter.BGABannerAdapter;
 import com.lin.seasonsfruit.MVP.Base.BaseFragment;
-import com.lin.seasonsfruit.MVP.Entity.BannerDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeBannerDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeGoodsClassDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeGoodsListDto;
+import com.lin.seasonsfruit.MVP.Entity.HomeTipDto;
 import com.lin.seasonsfruit.MVP.Home.presenter.HomePageFragmentPresenter;
 import com.lin.seasonsfruit.MVP.Home.view.HomePageFragmentView;
 import com.lin.seasonsfruit.R;
@@ -39,7 +41,7 @@ public class HomePageFragment extends BaseFragment implements HomePageFragmentVi
     SpringView homePageSpringview;
 
     private HomePageFragmentPresenter mHomePageFragmentPresenter;
-    private List<BannerDto> mBannerList = new ArrayList<>();
+    private List<HomeBannerDto> mBannerList = new ArrayList<>();
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -86,17 +88,44 @@ public class HomePageFragment extends BaseFragment implements HomePageFragmentVi
     }
 
     @Override
-    public void newDatas(HomeDto data) {
-        mBannerList = data.getBanner();
+    public void newHomeBanner(List<HomeBannerDto> homeBannerDto) {
         List<String> bannerTitle = new ArrayList<>();
         List<String> bannerImage = new ArrayList<>();
-        for (int temp = 0 ; temp < data.getBanner().size() ; temp++) {
-            bannerTitle.add(data.getBanner().get(temp).getBannerTitle());
-            bannerImage.add(data.getBanner().get(temp).getImageUrl());
+        for (int temp = 0 ; temp < homeBannerDto.size() ; temp++) {
+            bannerTitle.add(homeBannerDto.get(temp).getBannerTitle());
+            bannerImage.add(homeBannerDto.get(temp).getImageUrl());
         }
         homePageBanner.setAdapter(new BGABannerAdapter(getActivity()));
         homePageBanner.setData(bannerImage, bannerTitle);
     }
+
+    @Override
+    public void newHomeGoodsClass(List<HomeGoodsClassDto> homeGoodsClassDto) {
+
+    }
+
+    @Override
+    public void newHomeGoodsList(List<HomeGoodsListDto> homeGoodsListDto) {
+
+    }
+
+    @Override
+    public void newHomeTip(List<HomeTipDto> homeTipDto) {
+
+    }
+
+//    @Override
+//    public void newDatas(HomeDto data) {
+//        mBannerList = data.getBanner();
+//        List<String> bannerTitle = new ArrayList<>();
+//        List<String> bannerImage = new ArrayList<>();
+//        for (int temp = 0 ; temp < data.getBanner().size() ; temp++) {
+//            bannerTitle.add(data.getBanner().get(temp).getBannerTitle());
+//            bannerImage.add(data.getBanner().get(temp).getImageUrl());
+//        }
+//        homePageBanner.setAdapter(new BGABannerAdapter(getActivity()));
+//        homePageBanner.setData(bannerImage, bannerTitle);
+//    }
 
     @Override
     public void showLoadFailMsg() {
