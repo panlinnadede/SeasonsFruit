@@ -1,6 +1,8 @@
 package com.lin.seasonsfruit.MVP.Home.presenter;
 
 
+import android.util.Log;
+
 import com.lin.seasonsfruit.MVP.Entity.HomeBannerDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeGoodsClassDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeGoodsListDto;
@@ -53,6 +55,7 @@ public class HomePageFragmentPresenter implements /* OnLoadDataListListener<Home
 
     @Override
     public void onFailure(Throwable e) {
+        Log.d("PLPLPL", "onFailure: e", e);
         mView.showLoadFailMsg();
     }
 

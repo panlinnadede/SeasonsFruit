@@ -1,24 +1,21 @@
 package com.lin.seasonsfruit.Data.HttpData;
 
 
-import android.util.Log;
-
+import com.lin.seasonsfruit.Data.API.HomeCacheProviders;
 import com.lin.seasonsfruit.Data.API.HomeService;
-import com.lin.seasonsfruit.Data.API.CacheProviders;
-import com.lin.seasonsfruit.Data.Retrofit.ApiException;
 import com.lin.seasonsfruit.Data.Retrofit.RetrofitUtils;
 import com.lin.seasonsfruit.MVP.Entity.HomeBannerDto;
-import com.lin.seasonsfruit.MVP.Entity.HomeDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeGoodsClassDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeGoodsListDto;
 import com.lin.seasonsfruit.MVP.Entity.HomeTipDto;
-import com.lin.seasonsfruit.MVP.Entity.HttpResult;
 import com.lin.seasonsfruit.Util.FileUtil;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import io.rx_cache.DynamicKey;
+import io.rx_cache.EvictDynamicKey;
 import io.rx_cache.Reply;
 import io.rx_cache.internal.RxCache;
 import rx.Observable;
@@ -37,9 +34,9 @@ import rx.schedulers.Schedulers;
 public class HttpData extends RetrofitUtils {
 
     private static File cacheDirectory = FileUtil.getcacheDirectory();
-    private static final CacheProviders providers = new RxCache.Builder()
+    private static final HomeCacheProviders providers = new RxCache.Builder()
             .persistence(cacheDirectory)
-            .using(CacheProviders.class);
+            .using(HomeCacheProviders.class);
     protected static final HomeService service = getRetrofit().create(HomeService.class);
 
     //在访问HttpMethods时创建单例
@@ -78,59 +75,27 @@ public class HttpData extends RetrofitUtils {
 //    }
 
     public void getHomeBanner(boolean isload,Observer<List<HomeBannerDto>> observer){
-        Observable observable=service.getHomeBanner()
-                .flatMap(new Func1<Map<String, List<HomeBannerDto>>, Observable<?>>() {
-                    @Override
-                    public Observable<?> call(Map<String, List<HomeBannerDto>> map) {
-                        return Observable.just(map.get("results"));
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io());
-        observable.subscribe(observer);
+        Observable observable=service.getHomeBanner().flatMap(new HttpResultFunc<List<HomeBannerDto>>());
+        Observable observableCache = providers.getHomeBanner(observable, new DynamicKey("Banner配置"),new EvictDynamicKey(isload)).map(new HttpResultFuncCache<List<HomeBannerDto>>());
+        setSubscribe(observableCache, observer);
     }
 
     public void getHomeGoodsClass(boolean isload,Observer<List<HomeGoodsClassDto>> observer){
-        Observable observable=service.getHomeGoodsClass()
-                .flatMap(new Func1<Map<String, List<HomeGoodsClassDto>>, Observable<?>>() {
-                    @Override
-                    public Observable<?> call(Map<String, List<HomeGoodsClassDto>> map) {
-                        return Observable.just(map.get("results"));
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io());
-        observable.subscribe(observer);
+        Observable observable=service.getHomeGoodsClass().flatMap(new HttpResultFunc<List<HomeGoodsClassDto>>());
+        Observable observableCache = providers.getHomeGoodsClass(observable, new DynamicKey("商品分类"), new EvictDynamicKey(isload)).map(new HttpResultFuncCache<List<HomeGoodsClassDto>>());
+        setSubscribe(observableCache, observer);
     }
 
     public void getHomeGoodsList(boolean isload,Observer<List<HomeGoodsListDto>> observer){
-        Observable observable=service.getHomeGoodsList()
-                .flatMap(new Func1<Map<String, List<HomeGoodsListDto>>, Observable<?>>() {
-                    @Override
-                    public Observable<?> call(Map<String, List<HomeGoodsListDto>> map) {
-                        return Observable.just(map.get("results"));
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io());
-        observable.subscribe(observer);
+        Observable observable=service.getHomeGoodsList().flatMap(new HttpResultFunc<List<HomeGoodsListDto>>());
+        Observable observableCache = providers.getHomeGoodsList(observable, new DynamicKey("商品列表"), new EvictDynamicKey(isload)).map(new HttpResultFuncCache<List<HomeGoodsListDto>>());
+        setSubscribe(observableCache, observer);
     }
 
     public void getHomeTip(boolean isload,Observer<List<HomeTipDto>> observer){
-        Observable observable=service.getHomeTip()
-                .flatMap(new Func1<Map<String, List<HomeTipDto>>, Observable<?>>() {
-                    @Override
-                    public Observable<?> call(Map<String, List<HomeTipDto>> map) {
-                        return Observable.just(map.get("results"));
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io());
-        observable.subscribe(observer);
+        Observable observable=service.getHomeTip().flatMap(new HttpResultFunc<List<HomeTipDto>>());
+        Observable observableCache = providers.getHomeTip(observable, new DynamicKey("首页提示"), new EvictDynamicKey(isload)).map(new HttpResultFuncCache<List<HomeTipDto>>());
+        setSubscribe(observableCache, observer);
     }
 
     /**
@@ -140,37 +105,59 @@ public class HttpData extends RetrofitUtils {
      * @param observer
      * @param <T>
      */
+//    public static <T> void setSubscribe(Observable<T> observable, Observer<T> observer) {
+//        observable.subscribeOn(Schedulers.io())
+//                .subscribeOn(Schedulers.newThread())//子线程访问网络
+//                .observeOn(AndroidSchedulers.mainThread())//回调到主线程
+//                .subscribe(observer);
+//    }
+
     public static <T> void setSubscribe(Observable<T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.newThread())//子线程访问网络
                 .observeOn(AndroidSchedulers.mainThread())//回调到主线程
                 .subscribe(observer);
     }
+
     /**
      * 用来统一处理Http的resultCode,并将HttpResult的Data部分剥离出来返回给subscriber
      *
      * @param <T>   Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
-    private  class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
+//    private  class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
+//
+//        @Override
+//        public T call(HttpResult<T> httpResult) {
+//            Log.d("PLPLPL", "HttpResultFunc--call: httpResult.getCode = " + httpResult.getCode() + " httpResult.getData = " + httpResult.getData());
+//            if (httpResult.getCode() !=1 ) {
+//                throw new ApiException(httpResult);
+//            }
+//            return httpResult.getData();
+//        }
+//    }
 
+    private class HttpResultFunc<T> implements Func1<Map<String, T>, Observable<?>> {
         @Override
-        public T call(HttpResult<T> httpResult) {
-            Log.d("PLPLPL", "HttpResultFunc--call: httpResult.getCode = " + httpResult.getCode() + " httpResult.getData = " + httpResult.getData());
-            if (httpResult.getCode() !=1 ) {
-                throw new ApiException(httpResult);
-            }
-            return httpResult.getData();
+        public Observable<?> call(Map<String, T> map) {
+            return Observable.just(map.get("results"));
         }
     }
 
     /**
      * 用来统一处理RxCacha的结果
      */
-    private  class HttpResultFuncCcche<T> implements Func1<Reply<T>, T> {
+//    private  class HttpResultFuncCcche<T> implements Func1<Reply<T>, T> {
+//
+//        @Override
+//        public T call(Reply<T> httpResult) {
+//            return httpResult.getData();
+//        }
+//    }
 
+    private class HttpResultFuncCache<T> implements Func1<Reply<T>, T> {
         @Override
-        public T call(Reply<T> httpResult) {
-            return httpResult.getData();
+        public T call(Reply<T> tReply) {
+            return tReply.getData();
         }
     }
 
