@@ -9,6 +9,7 @@ import com.lin.seasonsfruit.MVP.Entity.HomeTipDto;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import rx.Observable;
@@ -24,14 +25,14 @@ public interface HomeService {
     @GET("1/classes/HomeBannerDto")
     Observable<Map<String,List<HomeBannerDto>>> getHomeBanner();
 
-    @Headers({"X-Bmob-Application-Id:"+ Constant.APPLICATION_ID,
-            "X-Bmob-REST-API-Key:"+Constant.REST_APP_KEY})
-    @GET("1/classes/HomeGoodsClassDto")
-    Observable<Map<String,List<HomeGoodsClassDto>>> getHomeGoodsClass();
+//    @Headers({"X-Bmob-Application-Id:"+ Constant.APPLICATION_ID,
+//            "X-Bmob-REST-API-Key:"+Constant.REST_APP_KEY})
+//    @GET("1/classes/HomeGoodsClassDto")
+//    Observable<Map<String,List<HomeGoodsClassDto>>> getHomeGoodsClass();
 
     @Headers({"X-Bmob-Application-Id:"+ Constant.APPLICATION_ID,
             "X-Bmob-REST-API-Key:"+Constant.REST_APP_KEY})
-    @GET("1/classes/HomeGoodsListDto")
+    @GET("1/classes/HomeGoodsListDto?include=goodsClass")
     Observable<Map<String,List<HomeGoodsListDto>>> getHomeGoodsList();
 
     @Headers({"X-Bmob-Application-Id:"+ Constant.APPLICATION_ID,

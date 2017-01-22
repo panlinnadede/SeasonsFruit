@@ -2,6 +2,7 @@ package com.lin.seasonsfruit.MVP.Home.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,14 +100,14 @@ public class HomePageFragment extends BaseFragment implements HomePageFragmentVi
         homePageBanner.setData(bannerImage, bannerTitle);
     }
 
-    @Override
-    public void newHomeGoodsClass(List<HomeGoodsClassDto> homeGoodsClassDto) {
-
-    }
+//    @Override
+//    public void newHomeGoodsClass(List<HomeGoodsClassDto> homeGoodsClassDto) {
+//
+//    }
 
     @Override
     public void newHomeGoodsList(List<HomeGoodsListDto> homeGoodsListDto) {
-
+        Log.d("PLPLPL", "newHomeGoodsList--classTitle = " + homeGoodsListDto.get(0).getGoodsClass().getClassTitle());
     }
 
     @Override

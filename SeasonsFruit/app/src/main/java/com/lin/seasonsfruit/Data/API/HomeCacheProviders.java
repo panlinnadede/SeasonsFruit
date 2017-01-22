@@ -30,8 +30,8 @@ public interface HomeCacheProviders {
     @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
     Observable<Reply<List<HomeBannerDto>>> getHomeBanner (Observable<List<HomeBannerDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 
-    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
-    Observable<Reply<List<HomeGoodsClassDto>>> getHomeGoodsClass (Observable<List<HomeGoodsClassDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
+//    @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
+//    Observable<Reply<List<HomeGoodsClassDto>>> getHomeGoodsClass (Observable<List<HomeGoodsClassDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);
 
     @LifeCache(duration = 7, timeUnit = TimeUnit.DAYS)
     Observable<Reply<List<HomeGoodsListDto>>> getHomeGoodsList (Observable<List<HomeGoodsListDto>> oRepos, DynamicKey userName, EvictDynamicKey evictDynamicKey);

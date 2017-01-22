@@ -1,6 +1,7 @@
 package com.lin.seasonsfruit.MVP.Entity;
 
-import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by lin on 16-12-20.
@@ -8,7 +9,7 @@ import cn.bmob.v3.BmobObject;
  * 商品列表
  */
 
-public class HomeGoodsListDto extends BmobObject {
+public class HomeGoodsListDto extends BmobRelation {
     private int id;
     private int goodsId;
     private String goodsName;
@@ -17,6 +18,15 @@ public class HomeGoodsListDto extends BmobObject {
     private String goodsTag;
     private int saleAmount;
     private String goodsIntroduction;
+    private HomeGoodsClassDto goodsClass;
+
+    public HomeGoodsClassDto getGoodsClass() {
+        return goodsClass;
+    }
+
+    public void setGoodsClass(HomeGoodsClassDto goodsClass) {
+        this.goodsClass = goodsClass;
+    }
 
     public void setId(int id) {
         this.id = id;

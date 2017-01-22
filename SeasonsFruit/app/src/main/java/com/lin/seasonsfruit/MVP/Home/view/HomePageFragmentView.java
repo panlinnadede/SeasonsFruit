@@ -26,7 +26,7 @@ public interface HomePageFragmentView {
     void newHomeBanner(List<HomeBannerDto> homeBannerDto);
 
     //加载首页商品分类
-    void newHomeGoodsClass(List<HomeGoodsClassDto> homeGoodsClassDto);
+//    void newHomeGoodsClass(List<HomeGoodsClassDto> homeGoodsClassDto);
 
     //加载首页商品列表
     void newHomeGoodsList(List<HomeGoodsListDto> homeGoodsListDto);

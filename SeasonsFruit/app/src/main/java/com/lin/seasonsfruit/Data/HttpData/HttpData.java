@@ -80,11 +80,11 @@ public class HttpData extends RetrofitUtils {
         setSubscribe(observableCache, observer);
     }
 
-    public void getHomeGoodsClass(boolean isload,Observer<List<HomeGoodsClassDto>> observer){
-        Observable observable=service.getHomeGoodsClass().flatMap(new HttpResultFunc<List<HomeGoodsClassDto>>());
-        Observable observableCache = providers.getHomeGoodsClass(observable, new DynamicKey("商品分类"), new EvictDynamicKey(isload)).map(new HttpResultFuncCache<List<HomeGoodsClassDto>>());
-        setSubscribe(observableCache, observer);
-    }
+//    public void getHomeGoodsClass(boolean isload,Observer<List<HomeGoodsClassDto>> observer){
+//        Observable observable=service.getHomeGoodsClass().flatMap(new HttpResultFunc<List<HomeGoodsClassDto>>());
+//        Observable observableCache = providers.getHomeGoodsClass(observable, new DynamicKey("商品分类"), new EvictDynamicKey(isload)).map(new HttpResultFuncCache<List<HomeGoodsClassDto>>());
+//        setSubscribe(observableCache, observer);
+//    }
 
     public void getHomeGoodsList(boolean isload,Observer<List<HomeGoodsListDto>> observer){
         Observable observable=service.getHomeGoodsList().flatMap(new HttpResultFunc<List<HomeGoodsListDto>>());

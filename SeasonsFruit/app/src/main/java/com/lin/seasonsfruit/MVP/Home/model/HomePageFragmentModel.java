@@ -52,22 +52,24 @@ public class HomePageFragmentModel {
                 homePageFragmentPresenter.onLoadBannerSuccess(homeBannerDtos);
             }
         });
-        HttpData.getInstance().getHomeGoodsClass(isload, new Observer<List<HomeGoodsClassDto>>() {
-            @Override
-            public void onCompleted() {
 
-            }
+//        HttpData.getInstance().getHomeGoodsClass(isload, new Observer<List<HomeGoodsClassDto>>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                homePageFragmentPresenter.onFailure(e);
+//            }
+//
+//            @Override
+//            public void onNext(List<HomeGoodsClassDto> homeGoodsClassDtos) {
+//                homePageFragmentPresenter.onLoadClassSuccess(homeGoodsClassDtos);
+//            }
+//        });
 
-            @Override
-            public void onError(Throwable e) {
-                homePageFragmentPresenter.onFailure(e);
-            }
-
-            @Override
-            public void onNext(List<HomeGoodsClassDto> homeGoodsClassDtos) {
-                homePageFragmentPresenter.onLoadClassSuccess(homeGoodsClassDtos);
-            }
-        });
         HttpData.getInstance().getHomeGoodsList(isload, new Observer<List<HomeGoodsListDto>>() {
             @Override
             public void onCompleted() {
@@ -84,6 +86,7 @@ public class HomePageFragmentModel {
                 homePageFragmentPresenter.onLoadListSuccess(homeGoodsListDtos);
             }
         });
+
         HttpData.getInstance().getHomeTip(isload, new Observer<List<HomeTipDto>>() {
             @Override
             public void onCompleted() {

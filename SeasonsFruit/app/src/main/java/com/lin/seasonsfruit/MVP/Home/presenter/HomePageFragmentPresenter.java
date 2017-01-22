@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by XY on 2016/9/17.
  */
-public class HomePageFragmentPresenter implements /* OnLoadDataListListener<HomeDto> */ OnLoadHomeBannerListener, OnLoadHomeGoodsClassListener, OnLoadHomeGoodsListListener, OnLoadHomeTipListener {
+public class HomePageFragmentPresenter implements /* OnLoadDataListListener<HomeDto> */ OnLoadHomeBannerListener, /*OnLoadHomeGoodsClassListener,*/ OnLoadHomeGoodsListListener, OnLoadHomeTipListener {
     private HomePageFragmentView mView;
     private HomePageFragmentModel mModel;
 
@@ -38,10 +38,10 @@ public class HomePageFragmentPresenter implements /* OnLoadDataListListener<Home
         mView.newHomeBanner(homeBannerDto);
     }
 
-    @Override
-    public void onLoadClassSuccess(List<HomeGoodsClassDto> homeGoodsClassDto) {
-        mView.newHomeGoodsClass(homeGoodsClassDto);
-    }
+//    @Override
+//    public void onLoadClassSuccess(List<HomeGoodsClassDto> homeGoodsClassDto) {
+//        mView.newHomeGoodsClass(homeGoodsClassDto);
+//    }
 
     @Override
     public void onLoadListSuccess(List<HomeGoodsListDto> homeGoodsListDto) {

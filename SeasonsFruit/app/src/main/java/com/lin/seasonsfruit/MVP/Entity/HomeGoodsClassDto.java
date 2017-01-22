@@ -1,6 +1,7 @@
 package com.lin.seasonsfruit.MVP.Entity;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by lin on 17-1-2.

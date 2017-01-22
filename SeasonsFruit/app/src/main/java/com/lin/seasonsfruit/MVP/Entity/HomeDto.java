@@ -8,7 +8,6 @@ import cn.bmob.v3.BmobObject;
 public class HomeDto extends BmobObject {
     private HomeBannerDto banner;
     private HomeGoodsClassDto classification;
-    private HomeGoodsListDto goodsList;
     private HomeTipDto distribution;
 
     public HomeBannerDto getBanner() {
@@ -25,14 +24,6 @@ public class HomeDto extends BmobObject {
 
     public void setClassification(HomeGoodsClassDto classification) {
         this.classification = classification;
-    }
-
-    public HomeGoodsListDto getGoodsList() {
-        return goodsList;
-    }
-
-    public void setGoodsList(HomeGoodsListDto goodsList) {
-        this.goodsList = goodsList;
     }
 
     public HomeTipDto getDistribution() {
